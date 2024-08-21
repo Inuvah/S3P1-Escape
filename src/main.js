@@ -24,6 +24,7 @@ var board;
 let playerMove = true;
 let interact = false;
 let interacting = 0;
+let pressed = 0;
 
 function preload () {
     //basics
@@ -118,28 +119,37 @@ function update () {
     //lock movement during interactions
     if (cursors.shift.isDown) {
         interact = true;
+        pressed++;
     } 
 
+    
+    if (cursors.shift.isUp) {
+        pressed = 0
+    }
 }
 
 
 function tilePuzzle (player, plant) {
+//open close puzzle... mess
+    if (interact == true && interacting == false && pressed <= 0) 
+    {
+        board = this.add.image(400, 300, 'board');
+        board.setActive(true).setVisible(true);
+        player.setVelocityY(0);
+        player.setVelocityX(0);
+        playerMove = false
+        interacting = true;
+        interact = false;
+        pressed = 2;
+    }
 
-    if (interact == true && interacting == false) {
-    board = this.add.image(400, 300, 'board');
-    board.setActive(true).setVisible(true);
-    player.setVelocityY(0);
-    player.setVelocityX(0);
-    playerMove = false
-    interacting = true;
-    interact = false;
-    } 
-
-    if (interacting == true && interact == true)
+    if (interacting == true && interact == true && pressed == 0)
     {
         board.setActive(false).setVisible(false);
         playerMove = true;
         interacting = false;
         interact = false;
     }
+
+    
 }
