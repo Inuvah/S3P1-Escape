@@ -1,4 +1,4 @@
-//This a bout to be a damn mess... one day code weee...
+//This a bout to be a damn mess... 
 const config = {
     type: Phaser.AUTO,
     width: 800,
@@ -16,26 +16,83 @@ const config = {
         update: update,
     }
 };
-//vars
+//Phaser base setup for creating basic canvas with premade physics
 const game = new Phaser.Game(config);
+//objects
 var player;
 var plant;
 var board;
+const tiles = [
+
+    greenTile = {
+        color: "green",
+        right: false,
+        left: true,
+        down: true,
+        up: false,
+        x: 666.666,
+        y: 0,
+
+    },
+    yellowTile = {
+        color: "yellow",
+        right: true,
+        left: true,
+        down: false,
+        up: false,
+        x: 133.33,
+        y: 0,
+
+    },
+    orangeTile = {
+        color: "orange",
+        right: false,
+        left: true,
+        down: true,
+        up: false,
+        x: 400,
+        y: 300,
+
+    },
+    tealTile = {
+        color: "teal",
+        right: false,
+        left: false,
+        down: false,
+        up: true,
+        x: 133.33,
+        y: 500,
+
+    },
+    purpleTile = {
+        color: "purple",
+        right: true,
+        left: true,
+        down: true,
+        up: true,
+        key: "greyTile",
+        x: 670,
+        y: 500,
+    },
+]
+//values/booleans
 let playerMove = true;
 let interact = false;
 let interacting = 0;
 let pressed = 0;
 
 function preload () {
-    //basics
+    //Background/Player
     this.load.image('office', 'img/office.png')
     this.load.image('playerOne', 'img/playerOne.png')
+    //disregard temp for testing
     this.load.spritesheet('dude',
         'img/dude.png',
         { frameWidth: 32, frameHeight: 48 }
     );
 
     //assets
+    //objects on scene
     this.load.image('plant', 'img/assets/plante.png');
 
     //tile puzzle
@@ -47,19 +104,20 @@ function preload () {
 function create () {
     //background
     this.add.image(350, 500, 'office').setScale(0.5);
-    //interactables
+
+    //interactables objects
     plant = this.physics.add.staticGroup();
     plant.create(400, 300, 'plant').setScale(0.4).refreshBody();
-
-    
 
     //player sprite/image and edge collision on game window
     player = this.physics.add.image(100, 450, 'playerOne').setScale(0.5).refreshBody();
     player.setCollideWorldBounds(true);
+
+    //objects physics/collision
     plant = this.physics.add.overlap(player, plant, tilePuzzle, null, this);
     this.physics.add.collider(player, plant);
     
-    //Keybinds created
+    //Animations 
     this.anims.create({
         key: 'left',
         frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
@@ -85,45 +143,47 @@ function create () {
 }
 
 function update () {
+    var currentController = player;
     //Keybinds watched and put in to effect
     if (playerMove == true) {
     if (cursors.left.isDown)
         {
-            player.setVelocityX(-160);
+            currentController.setVelocityX(-160);
         
         }
         else if (cursors.right.isDown)
         {
-            player.setVelocityX(160);
+            currentController.setVelocityX(160);
             
         }
         else
         {
-            player.setVelocityX(0);
+            currentController.setVelocityX(0);
             
         }
         
         if (cursors.up.isDown)
         {
-            player.setVelocityY(-160);
+            currentController.setVelocityY(-160);
         }
         else if(cursors.down.isDown) 
         {
-            player.setVelocityY(160);
+            currentController.setVelocityY(160);
         }
         else
         {
-            player.setVelocityY(0);
+            currentController.setVelocityY(0);
         }
     }
-    //lock movement during interactions
-    if (cursors.shift.isDown) {
+    if (cursors.shift.isDown) 
+    {
         interact = true;
+        //Using pressed to make sure only one input is registered
+        //regardless of how long one presses
         pressed++;
     } 
-
-    
-    if (cursors.shift.isUp) {
+    if (cursors.shift.isUp) 
+    {
         pressed = 0
     }
 }
@@ -133,11 +193,24 @@ function tilePuzzle (player, plant) {
 //open close puzzle... mess
     if (interact == true && interacting == false && pressed <= 0) 
     {
-        board = this.add.image(400, 300, 'board');
+        board = this.add.image(400, 300, 'greyBoard');
         board.setActive(true).setVisible(true);
+
+        for (i = tiles.length - 1; i >= 0; i--) {
+            tiles[i].physics = this.physics.add.image(tiles[i].x, tiles[i].y, "tile");
+            tiles[i].physics.setCollideWorldBounds(true);
+            //tiles[i].addListener('click');
+        }
+/*
+        tiles.greenTile.on('click', (event) => {
+            console.log('clicked');
+        });
+        */
+        //lock movement during interactions
         player.setVelocityY(0);
         player.setVelocityX(0);
         playerMove = false
+
         interacting = true;
         interact = false;
         pressed = 2;
@@ -145,11 +218,16 @@ function tilePuzzle (player, plant) {
 
     if (interacting == true && interact == true && pressed == 0)
     {
+        //remove puzzle
         board.setActive(false).setVisible(false);
+        for (i = tiles.length - 1; i >= 0; i--) {
+           tiles[i].physics.setActive(false).setVisible(false);
+        }
+        
         playerMove = true;
         interacting = false;
         interact = false;
     }
 
-    
 }
+
