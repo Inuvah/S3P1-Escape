@@ -82,9 +82,16 @@ let interacting = 0;
 let pressed = 0;
 
 function preload () {
-    //Background/Player
+    //scenes
     this.load.image('office', 'img/office.png')
+    this.load.image('login', 'img/assets/login.png');
+    this.load.image('mailApp', 'img/assets/mailApp.png');
+    this.load.image('mailMessage', 'img/assets/mailMessage.png');
+    this.load.image('pc', 'img/assets/pc.png');
+
+    //Player
     this.load.image('playerOne', 'img/playerOne.png')
+
     //disregard temp for testing
     this.load.spritesheet('dude',
         'img/dude.png',
@@ -94,6 +101,26 @@ function preload () {
     //assets
     //objects on scene
     this.load.image('plant', 'img/assets/plante.png');
+    this.load.image('badetæppe', 'img/assets/Badetppe.png');
+    this.load.image('bamse', 'img/assets/Bamse.png');
+    this.load.image('bog', 'img/assets/Bog.png');
+    this.load.image('brev', 'img/assets/Brev.png');
+    this.load.image('id', 'img/assets/id.png');
+    this.load.image('kalender', 'img/assets/Kalender.png');
+    this.load.image('kommode', 'img/assets/Kommode.png');
+    this.load.image('kop', 'img/assets/Kop.png');
+    this.load.image('lampe', 'img/assets/Lampe.png');
+    this.load.image('letter', 'img/assets/letter.png');
+    this.load.image('mail', 'img/assets/mail.png');
+    this.load.image('papir', 'img/assets/Papir.png');
+    this.load.image('papkasse', 'img/assets/Papkasse.png');
+    this.load.image('seng', 'img/assets/Seng.png');
+    this.load.image('skab', 'img/assets/Skab.png');
+    this.load.image('stol', 'img/assets/Stol.png');
+    this.load.image('toilet', 'img/assets/Toilet.png');
+    this.load.image('trash', 'img/assets/Trash.png');
+    this.load.image('ur', 'img/assets/Ur.png');
+
 
     //tile puzzle
     this.load.image('board', 'img/assets/1x/circleBoard.png');
