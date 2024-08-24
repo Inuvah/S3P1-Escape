@@ -22,8 +22,8 @@ const game = new Phaser.Game(config);
 var player;
 var plant;
 var board;
+var skab;
 const tiles = [
-
     greenTile = {
         color: "green",
         right: false,
@@ -135,6 +135,9 @@ function create () {
     //interactables objects
     plant = this.physics.add.staticGroup();
     plant.create(400, 300, 'plant').setScale(0.4).refreshBody();
+    skab = this.physics.add.staticGroup();
+    skab.create(75, 200, 'skab').setScale(0.5).refreshBody();
+
 
     //player sprite/image and edge collision on game window
     player = this.physics.add.image(100, 450, 'playerOne').setScale(0.5).refreshBody();
@@ -228,7 +231,7 @@ function tilePuzzle (player, plant) {
             tiles[i].physics.setCollideWorldBounds(true);
             //tiles[i].addListener('click');
         }
-/*
+        /*
         tiles.greenTile.on('click', (event) => {
             console.log('clicked');
         });
