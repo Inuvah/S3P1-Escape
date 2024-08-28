@@ -4,14 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>fml</title>
+    <title>Escape</title>
 </head>
 <body>
 
-<a href="tempptwo.html" style="position: absolute;">Player Two</a>
-
+    <!--Always load library first-->
     <script src="src/phaser.js"></script>
-    <script src="src/main.js"></script>
+    <script src="src/globalVars.js"></script>
+    <!--Scene go in the order that you play them in-->
+    <script src="src/scenes/startScene.js"></script>
+    <script src="src/scenes/scene1_1.js"></script>
+    <script src="src/scenes/scene1_2.js"></script>
     <script src="src/functions/functions.js"></script>
+    <!--Main js file at the end it depends on everything else-->
+    <script src="src/main.js"></script>
 </body>
 </html>
