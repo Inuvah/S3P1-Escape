@@ -94,7 +94,7 @@ let pressed = 0;
 function preload () {
     //scenes
     this.load.image('office', 'img/office.png')
-    this.load.image('loginPc', 'img/assets/loginPc.png');
+    this.load.image('loginPc', 'img/pcBackground.png');
     this.load.image('mailApp', 'img/assets/mailApp.png');
     this.load.image('mailMessage', 'img/assets/mailMessage.png');
     this.load.image('pc', 'img/assets/pc.png');
@@ -333,11 +333,11 @@ function showId () {
 function pcShow () {
     if (interact == true && interacting == false && pressed <= 0) 
     {
-        pcTrigger = this.add.image(400, 300, 'loginPc').setScale(1.5);
+        pcTrigger = this.add.image(400, 300, 'loginPc').setScale(1);
         pcTrigger.setActive(true).setVisible(true);
         
         //Text input using rexUi plugin
-        const text = this.add.text(400, 300, textField, { fixedWidth: 150, fixedHeight: 36 });
+        const text = this.add.text(430, 308, textField, { fixedWidth: 150, fixedHeight: 36 });
         text.setOrigin(0.5, 0.5);
         
             text.setInteractive().on('pointerdown', () => {
