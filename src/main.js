@@ -42,7 +42,6 @@ const tiles = [
         up: false,
         x: 666.666,
         y: 0,
-
     },
     yellowTile = {
         color: "yellow",
@@ -52,7 +51,6 @@ const tiles = [
         up: false,
         x: 133.33,
         y: 0,
-
     },
     orangeTile = {
         color: "orange",
@@ -62,7 +60,6 @@ const tiles = [
         up: false,
         x: 400,
         y: 300,
-
     },
     tealTile = {
         color: "teal",
@@ -72,7 +69,6 @@ const tiles = [
         up: true,
         x: 133.33,
         y: 500,
-
     },
     purpleTile = {
         color: "purple",
@@ -303,68 +299,3 @@ function tilePuzzle (player, plant) {
 
 }
 */
-function showId () {
-    if (interact == true && interacting == false && pressed <= 0) 
-        {
-            id = this.add.image(400, 300, 'id').setScale(1.5);
-            id.setActive(true).setVisible(true);
-    
-            //lock movement during interactions
-            player.setVelocityY(0);
-            player.setVelocityX(0);
-            playerMove = false
-    
-            interacting = true;
-            interact = false;
-            pressed = 2;
-        }
-    
-        if (interacting == true && interact == true && pressed == 0)
-        {
-            //remove puzzle
-            id.setActive(false).setVisible(false);
-            
-            playerMove = true;
-            interacting = false;
-            interact = false;
-        }
-}
-
-function pcShow () {
-    if (interact == true && interacting == false && pressed <= 0) 
-    {
-        pcTrigger = this.add.image(400, 300, 'loginPc').setScale(1);
-        pcTrigger.setActive(true).setVisible(true);
-        
-        //Text input using rexUi plugin
-        const text = this.add.text(430, 308, textField, { fixedWidth: 150, fixedHeight: 36 });
-        text.setOrigin(0.5, 0.5);
-        
-            text.setInteractive().on('pointerdown', () => {
-                this.rexUI.edit(text)
-                if(text._text === 'johndoe26') {
-                    console.log('yyaaay')
-                    text.setActive(false).setVisible(false);
-                    pcTrigger = this.add.image(400, 300, 'mailMessage');
-                }
-            });
-        //lock movement during interactions
-        player.setVelocityY(0);
-        player.setVelocityX(0);
-        playerMove = false
-
-        interacting = true;
-        interact = false;
-        pressed = 2;
-    }
-    if (interacting == true && interact == true && pressed == 0)
-    {
-        //remove puzzle
-        pcTrigger.setActive(false).setVisible(false);
-
-        playerMove = true;
-        interacting = false;
-        interact = false;
-    }
-
-}
