@@ -11,7 +11,7 @@ create() {
     
     
     //menu
-    const playerOne = this.add.text(400, 50, 'Player One', { fill: 'white' })
+    const playerOne = this.add.text(config.width / 2 - 50, config.height / 2 - 50, 'Player One', { fill: 'white' })
     .setInteractive().on('pointerdown', function (event)
     {
 
@@ -20,7 +20,7 @@ create() {
     }, this);
 
 
-    const playerTwo = this.add.text(400, 200, 'Player Two', { fill: 'white' })
+    const playerTwo = this.add.text(config.width / 2 - 50, config.height / 2, 'Player Two', { fill: 'white' })
     .setInteractive().on('pointerdown', function (event)
     {
 

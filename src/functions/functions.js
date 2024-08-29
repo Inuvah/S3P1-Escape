@@ -18,7 +18,6 @@ function pcPuzzle (player, note) {
         {
             //remove puzzle
             letter.setActive(false).setVisible(false);
-            
             playerMove = true;
             interacting = false;
             interact = false;
@@ -58,15 +57,15 @@ function doorShow () {
             doorSee = this.add.image(400, 300, 'doorKeypad').setScale(0.5);
     
             //Text input using rexUi plugin
-            const text = this.add.text(425, 215, 'Password', { fixedWidth: 150, fixedHeight: 36 });
+            text = this.add.text(425, 215, 'Password', { fixedWidth: 150, fixedHeight: 36 });
             text.setOrigin(0.5, 0.5);
 
             text.setInteractive().on('pointerdown', () => {
                 this.rexUI.edit(text)
                 if(text._text === '83224881lij') {
                     console.log('yyaaay')
-                    doorSee.setActive(false).setVisible(false);
-                    text.setActive(false).setVisible(false);
+                    doorSee.destroy();
+                    text.destroy();
                     pcHome = this.add.image(400, 300, 'end');
                 }
             });
@@ -85,7 +84,7 @@ function doorShow () {
         {
             //remove puzzle
             doorSee.setActive(false).setVisible(false);
-            
+            text.destroy();
             playerMove = true;
             interacting = false;
             interact = false;
@@ -126,22 +125,22 @@ function pcShow () {
         pcTrigger.setActive(true).setVisible(true);
         
         //Text input using rexUi plugin
-        const text = this.add.text(430, 308, textField, { fixedWidth: 150, fixedHeight: 36 });
+        text = this.add.text(430, 308, textField, { fixedWidth: 150, fixedHeight: 36 });
         text.setOrigin(0.5, 0.5);
         
             text.setInteractive().on('pointerdown', () => {
                 this.rexUI.edit(text)
                 if(text._text === 'johndoe26') {
-                    console.log('yyaaay')
-                    text.setActive(false).setVisible(false);
+                    console.log('yyaaay');
+                    text.destroy();
+                    pcTrigger.destroy();
                     pcTrigger = this.add.image(400, 300, 'mailMessage');
                 }
             });
         //lock movement during interactions
         player.setVelocityY(0);
         player.setVelocityX(0);
-        playerMove = false
-
+        playerMove = false;
         interacting = true;
         interact = false;
         pressed = 2;
@@ -149,8 +148,8 @@ function pcShow () {
     if (interacting == true && interact == true && pressed == 0)
     {
         //remove puzzle
+        text.destroy();
         pcTrigger.setActive(false).setVisible(false);
-
         playerMove = true;
         interacting = false;
         interact = false;
