@@ -15,10 +15,8 @@ const config = {
             debug: false,
         }
     },
-    scene:  [startScene, scene1_1, scene1_2]
+    scene:  [startScene, scene1_1, scene1_2, tutorialScene],
 };
 //Phaser base setup for creating basic canvas with premade physics
 const game = new Phaser.Game(config);
-
-
 

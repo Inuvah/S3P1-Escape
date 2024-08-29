@@ -8,6 +8,8 @@ let interacting = 0;
 let pressed = 0;
 let playerMove = true;
 var cursors;
+var keyboard;
+var background;
 //Scene Objects
 var pcTrigger;
 var pcMail;

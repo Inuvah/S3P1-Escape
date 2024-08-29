@@ -60,6 +60,7 @@ const tiles = [
  {
     //scenes
     this.load.image('office', 'img/office.png')
+    //kinda scenes :) sceneception
     this.load.image('loginPc', 'img/pcBackground.png');
     this.load.image('mailApp', 'img/assets/mailApp.png');
     this.load.image('mailMessage', 'img/assets/mailMessage.png');
