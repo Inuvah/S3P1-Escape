@@ -5,32 +5,11 @@ class scene1_2 extends Phaser.Scene{
 
 
 preload () {
-    //scenes
-    this.load.image('kitchen', 'img/kitchen.png');
-    this.load.image('end', 'img/assets/end.png');
-
-    //Player
-    this.load.image('playerOne', 'img/playerOne.png')
-
-    //disregard temp for testing
-    this.load.spritesheet('dude',
-        'img/dude.png',
-        { frameWidth: 32, frameHeight: 48 }
-    );
-
-    //assets
-    //objects on scene
-    this.load.image('calendar', 'img/assets/calendar.png');
-    this.load.image('letter', 'img/assets/letter.png');
-    this.load.image('papir', 'img/assets/Papir.png');
-    this.load.image('calendarSee', 'img/assets/calendarSee.png');
-    this.load.image('door', 'img/assets/door.png')
-    this.load.image('doorKeypad', 'img/assets/doorKeypad.png')
-
-    //tile puzzle
-    this.load.image('board', 'img/assets/1x/circleBoard.png');
-    this.load.image('greyBoard', 'img/assets/1x/greyBoard.png');
-    this.load.image('tile', 'img/assets/1x/greyTile.png');
+   //image loader
+   for (let i = level1_2.length -1; i >=0;  i--) {
+    const obtj = level1_2[i];
+    this.load.image(obtj.key, obtj.url);
+    }
 
     //text input and other ui elements
     this.load.scenePlugin({

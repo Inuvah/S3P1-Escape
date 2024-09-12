@@ -4,24 +4,22 @@ class tutorialScene extends Phaser.Scene {
     }
 
     preload(){
-        //Player
-        this.load.image('playerOne', 'img/playerOne.png');
-        //background
-        this.load.image('background2', 'img/tutorial.png');
-        this.load.image('keyBinds', 'img/assets/keysBinds.png');
-        this.load.image('wall', 'img/tutWall.png')
-        //objects
-        this.load.image('bed', 'img/assets/basicSeng.png');
-        this.load.image('box', 'img/assets/papkasse.png');
+        //image loader
+        for (let i = level_tut.length -1; i >=0;  i--) {
+            const obtj = level_tut[i];
+            this.load.image(obtj.key, obtj.url);
+        }
     }
 
     create(){
         var bed;
         var wall;
         var box1;
+        var keybind;
         //background
         this.add.image(0, 0, 'background2').setOrigin(0, 0);
-        this.add.image(550, 510, 'keyBinds').setScale(0.4);
+        keybind = this.physics.add.staticGroup();
+        keybind.create(550, 510, 'keyBinds').setScale(0.4).refreshBody();
         wall = this.physics.add.staticGroup();
         wall.create(445, 435, 'wall');
 
@@ -31,13 +29,19 @@ class tutorialScene extends Phaser.Scene {
 
 
         //objects
-        bed = this.add.image(750, 510, 'bed').setScale(0.3);
+        bed = this.physics.add.staticGroup();
+        bed.create(750, 510, 'bed').setScale(0.3).refreshBody();
         box1 = this.physics.add.image(300, 535, 'box').setScale(0.2).refreshBody();
+        door = this.physics.add.staticGroup();
+        door.create(225, 175, 'door').setScale(0.15).refreshBody();
 
+        //player
         player = this.physics.add.image(750, 510, 'playerOne').setScale(0.2).refreshBody();
         player.setCollideWorldBounds(true);
         box1.setCollideWorldBounds(true);
 
+        bed = this.physics.add.overlap(player, bed, bedText, null, this);
+        keybind = this.physics.add.overlap(player, keybind, keyText, null, this);
 
         this.physics.add.collider(player, wall);
         this.physics.add.collider(player, box1, function(player, box1) {
@@ -55,11 +59,13 @@ class tutorialScene extends Phaser.Scene {
             }
         }, null, this);
 
+        this.physics.add.overlap(player, door, doorTutOne, null, this);
+
         
     }
 
     update(){
-            //Keybinds watched and put in to effect
+    //Keybinds watched and put in to effect
     if (playerMove == true) {
         if (cursors.left.isDown)
             {

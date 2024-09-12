@@ -156,3 +156,16 @@ function pcShow () {
     }
 
 }
+
+function bedText(){
+    this.add.image(0, 0, 'tutText').setOrigin(0, 0);
+}
+function keyText(){
+    this.add.image(0, 0, 'tutText2').setOrigin(0, 0);
+}
+
+function doorTutOne() {
+    if(interact == true){
+        this.scene.transition({ target: 'playerTwoScene1', duration: 2000 });
+    }    
+}
